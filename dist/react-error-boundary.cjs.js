@@ -47,6 +47,7 @@ class ErrorBoundary extends react.Component {
     } = this.props;
     (_this$props$onError = (_this$props2 = this.props).onError) === null || _this$props$onError === void 0 || _this$props$onError.call(_this$props2, error, info);
     if (fallbackRender || FallbackComponent || fallback) {
+      console.log('set state');
       this.setState({
         didCatch: true,
         error
@@ -87,6 +88,7 @@ class ErrorBoundary extends react.Component {
       didCatch,
       error
     } = this.state;
+    console.log('render', didCatch, error);
     let childToRender = children;
     if (didCatch) {
       const props = {

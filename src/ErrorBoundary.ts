@@ -52,6 +52,7 @@ export class ErrorBoundary extends Component<
     this.props.onError?.(error, info);
 
     if (fallbackRender || FallbackComponent || fallback) {
+      console.log('set state');
       this.setState({
         didCatch: true,
         error,
@@ -90,6 +91,8 @@ export class ErrorBoundary extends Component<
     const { children, fallbackRender, FallbackComponent, fallback } =
       this.props;
     const { didCatch, error } = this.state;
+
+    console.log('render', didCatch, error);
 
     let childToRender = children;
 
