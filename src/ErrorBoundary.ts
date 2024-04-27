@@ -84,7 +84,7 @@ export class ErrorBoundary extends Component<
 
     let childToRender = children;
 
-    if (didCatch) {
+    if (didCatch && (fallbackRender || FallbackComponent || fallback)) {
       const props: FallbackProps = {
         error,
         resetErrorBoundary: this.resetErrorBoundary,
