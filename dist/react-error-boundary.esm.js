@@ -13,12 +13,11 @@ class ErrorBoundary extends Component {
     this.resetErrorBoundary = this.resetErrorBoundary.bind(this);
     this.state = initialState;
   }
-  static getDerivedStateFromError(error) {
-    return {
-      didCatch: true,
-      error
-    };
-  }
+
+  /* static getDerivedStateFromError(error: Error) {
+    return { didCatch: true, error };
+  } */
+
   resetErrorBoundary() {
     const {
       error

@@ -9,10 +9,6 @@ type ErrorBoundaryState = {
 };
 export declare class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     constructor(props: ErrorBoundaryProps);
-    static getDerivedStateFromError(error: Error): {
-        didCatch: boolean;
-        error: Error;
-    };
     resetErrorBoundary(...args: any[]): void;
     componentDidCatch(error: Error, info: ErrorInfo): void;
     componentDidUpdate(prevProps: ErrorBoundaryProps, prevState: ErrorBoundaryState): void;
