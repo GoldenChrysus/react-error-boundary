@@ -29,9 +29,9 @@ export class ErrorBoundary extends Component<
     this.state = initialState;
   }
 
-  static getDerivedStateFromError(error: Error) {
+  /* static getDerivedStateFromError(error: Error) {
     return { didCatch: true, error };
-  }
+  } */
 
   resetErrorBoundary(...args: any[]) {
     const { error } = this.state;
@@ -47,7 +47,16 @@ export class ErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
+    const { fallbackRender, FallbackComponent, fallback } = this.props;
+
     this.props.onError?.(error, info);
+
+    if (fallbackRender || FallbackComponent || fallback) {
+      this.setState({
+        didCatch: true,
+        error,
+      });
+    }
   }
 
   componentDidUpdate(
@@ -84,7 +93,7 @@ export class ErrorBoundary extends Component<
 
     let childToRender = children;
 
-    if (didCatch && (fallbackRender || FallbackComponent || fallback)) {
+    if (didCatch) {
       const props: FallbackProps = {
         error,
         resetErrorBoundary: this.resetErrorBoundary,

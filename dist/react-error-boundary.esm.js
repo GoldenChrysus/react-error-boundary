@@ -37,7 +37,18 @@ class ErrorBoundary extends Component {
   }
   componentDidCatch(error, info) {
     var _this$props$onError, _this$props2;
+    const {
+      fallbackRender,
+      FallbackComponent,
+      fallback
+    } = this.props;
     (_this$props$onError = (_this$props2 = this.props).onError) === null || _this$props$onError === void 0 || _this$props$onError.call(_this$props2, error, info);
+    if (fallbackRender || FallbackComponent || fallback) {
+      this.setState({
+        didCatch: true,
+        error
+      });
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     const {
@@ -74,7 +85,7 @@ class ErrorBoundary extends Component {
       error
     } = this.state;
     let childToRender = children;
-    if (didCatch && (fallbackRender || FallbackComponent || fallback)) {
+    if (didCatch) {
       const props = {
         error,
         resetErrorBoundary: this.resetErrorBoundary
